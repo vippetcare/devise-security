@@ -11,7 +11,7 @@ module Devise
       end
 
       def validate_password_archive
-        errors.add(:password, :taken_in_past) if encrypted_password_changed? && password_archive_included?
+        errors.add(:password, :taken_in_past) if will_save_change_to_encrypted_password? && password_archive_included?
       end
 
       # validate is the password used in the past
@@ -58,7 +58,7 @@ module Devise
 
       # archive the last password before save and delete all to old passwords from archive
       def archive_password
-        if encrypted_password_changed?
+        if saved_change_to_encrypted_password?
           if archive_count.to_i > 0
             old_passwords.create! old_password_params
             old_passwords.order(:id).reverse_order.offset(archive_count).destroy_all
