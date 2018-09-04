@@ -105,5 +105,4 @@ Devise.add_module :paranoid_verification, controller: :paranoid_verification_cod
 require 'devise-security/routes'
 require 'devise-security/rails'
 require "devise-security/orm/#{DEVISE_ORM}"
-require 'devise-security/models/database_authenticatable_patch'
 require 'devise-security/models/paranoid_verification'
